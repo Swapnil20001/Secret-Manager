@@ -1,6 +1,6 @@
 # Secret-Manager
 
-Secret CSI  Driver
+### Secret CSI  Driver
 
 When using AWS, these information (environment variables) are usually stored in AWS Secret Manager or AWS Systems Manager Paramater Store(SSM). We can store environment variable in these AWS services and by using secrets csi driver, we can access in kubernetes cluster.
 We usually need to access secrets from a pod to retrieve Datastores credentials, API Keys, etc.
@@ -63,7 +63,7 @@ the use of a KMS key (required if the secrets are encrypted)
 
 
 Now create Service account to allow the pods to assume the IAM role.
-Service-account.yaml
+### Service-account.yaml
 
         apiVersion: v1
         kind: ServiceAccount
@@ -87,12 +87,14 @@ TO install Secrets CSI Driver, we will be using helm. Apply following helm comma
 It will create 2 Pods in kube-system namespace.
 Also check logs to know CSI driver successfully installed or not.
 
-Installation of AWS Secrets and Configuration Provider (ASCP) :-
+### Installation of AWS Secrets and Configuration Provider (ASCP) :-
+
 To show secrets from Secrets Manager as files mounted in amazon eks pods, you can use the AWS Secrets and Configuration Provider (ASCP) for the Kubernetes Secrets Store CSI Driver
+
 With the ASCP, you can store and manage your secrets in Secrets Manager and then retrieve them through your workloads running on Amazon EKS. 
 If your secret contains multiple key/value pairs in JSON format, you can choose which ones to mount in Amazon EKS. The ASCP uses  JMESPath syntax to query the key/value pairs in your secret. The ASCP also works with Parameter store parameters.
-You use IAM roles and policies to grant access to your secrets to specific Amazon EKS pods in a cluster.
 
+You use IAM roles and policies to grant access to your secrets to specific Amazon EKS pods in a cluster.
 
 To install ASCP in cluster, use following command:-
 
@@ -105,7 +107,7 @@ It will also create 2 pods in kube-system namespace.
 Now we need to create SecretProviderClass.
 
 
-SecretProviderClass:-
+### SecretProviderClass:-
 To determine which secrets the ASCP mounts in Amazon EKS as files on the filesystem, you create a SecretProviderClass YAML file. The SecretProviderClass YAML lists the secrets to mount and the file name to mount them . The SecretProviderClass must be in the same namespace as the Amazon EKS pod it references. 
 
 
@@ -138,8 +140,11 @@ To determine which secrets the ASCP mounts in Amazon EKS as files on the filesys
 
 
 In secret provider class manifest file, The first “secretObject” Block (below provider) tell kubelet, which secrets we want to access from AWS Secret Manager.
+
 In parameter section, tell kubelet to which parameter ( i.e Key-value pair)  want to access it from secrets manager.
+
 And last SecretObject block ( below the parameter), used to create secrets for cluster/ local. This secret create when we apply pod manifest file.
+
 The secret name from this block should point to the name (-name: <>) in secretKeyRef from the environment section in pod manifest file. And key from secretobject should point to key in secretKeyRef .
 
 In Pod:-
