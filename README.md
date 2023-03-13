@@ -1,6 +1,5 @@
 # Secret-Manager
 
-### Secret CSI  Driver
 
 When using AWS, these information (environment variables) are usually stored in AWS Secret Manager or AWS Systems Manager Paramater Store(SSM). We can store environment variable in these AWS services and by using secrets csi driver, we can access in kubernetes cluster.
 We usually need to access secrets from a pod to retrieve Datastores credentials, API Keys, etc.
@@ -77,6 +76,7 @@ Now create Service account to allow the pods to assume the IAM role.
 It is important to note that this service account is only available to the specified namespace where your pod is running.
 Installation of  Secrets CSI Driver
 TO install Secrets CSI Driver, we will be using helm. Apply following helm command to install CSI Driver.
+### Secret CSI  Driver
 
     helm repo add secrets-store-csi-driver \ https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
     
