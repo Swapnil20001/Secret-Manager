@@ -79,8 +79,7 @@ Installation of  Secrets CSI Driver
 TO install Secrets CSI Driver, we will be using helm. Apply following helm command to install CSI Driver.
 
     helm repo add secrets-store-csi-driver \ https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
-
-
+    
     helm install -n kube-system csi-secrets-store \ --set syncSecret.enabled=true \ --set enableSecretRotation=true \ secrets-store-csi-driver/secrets-store-csi-driver
 
 
