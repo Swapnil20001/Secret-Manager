@@ -78,11 +78,10 @@ It is important to note that this service account is only available to the speci
 Installation of  Secrets CSI Driver
 TO install Secrets CSI Driver, we will be using helm. Apply following helm command to install CSI Driver.
 
+    helm repo add secrets-store-csi-driver \ https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 
-helm repo add secrets-store-csi-driver \ https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 
-
-helm install -n kube-system csi-secrets-store \ --set syncSecret.enabled=true \ --set enableSecretRotation=true \ secrets-store-csi-driver/secrets-store-csi-driver
+    helm install -n kube-system csi-secrets-store \ --set syncSecret.enabled=true \ --set enableSecretRotation=true \ secrets-store-csi-driver/secrets-store-csi-driver
 
 
 
@@ -98,8 +97,7 @@ You use IAM roles and policies to grant access to your secrets to specific Amazo
 
 To install ASCP in cluster, use following command:-
 
-
-kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
+    kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 
 It will also create 2 pods in kube-system namespace.
